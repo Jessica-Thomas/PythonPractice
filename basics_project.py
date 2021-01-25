@@ -50,3 +50,22 @@ while tickets_remaining >= 1:
             print("Bummer! Feel free to come back if you change your mind!")
 
 print("Tickets are all sold out!")
+
+
+
+
+continents = [
+'Asia',
+'South America',
+'North America',
+'Africa',
+'Europe',
+'Antarctica',
+'Australia',
+]
+# Your code here
+
+for continent in continents:
+if continent[0] == "A": print("* " + continent)
+
+
