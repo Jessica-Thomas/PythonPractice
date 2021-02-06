@@ -5,3 +5,5 @@ print(nums_partial)
 colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
 colors_partial = colors[3:6]
 print(colors_partial)
+
+

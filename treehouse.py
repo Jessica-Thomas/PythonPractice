@@ -50,20 +50,33 @@
 # If the message is too long,
 #     the function will raise a `MessageTooLongError`
 # """
-from twitter import (
-    tweet,
-    MessageTooLongError,
-    CommunicationError,
-)
+# from twitter import (
+#     tweet,
+#     MessageTooLongError,
+#     CommunicationError,
+# )
 
-message = input("What would you like to tweet?  ")
-# Your code here
+# message = input("What would you like to tweet?  ")
+# # Your code here
 
-try:
-    tweet(message)
+# try:
+#     tweet(message)
     
-except CommunicationError:
-    print("An error occurred attempting to connect to Twitter. Please try again!")
+# except CommunicationError:
+#     print("An error occurred attempting to connect to Twitter. Please try again!")
 
-except MessageTooLongError as err:
-    print("Oh no! Your message was too long ({})".format(err))
+# except MessageTooLongError as err:
+#     print("Oh no! Your message was too long ({})".format(err))
+
+
+
+
+def check_lottery_number(num):
+    lottery_numbers = [77, 24, 8, 18, 5, 64]
+
+    if num in lottery_numbers:
+        print(f'{num} is a winning number!')
+    else:
+        print(f'Try again, {num} is not a winning number.')
+
+check_lottery_number(3)
