@@ -222,3 +222,58 @@ class RaceCar:
     def run_lap(self, length):
         self.fuel_remaining -= length*0.125
         self.laps += 1
+
+
+
+I've made you a super-simple Inventory class that would let someone store items in it.
+
+I need you to create a new class, SortedInventory that should be a subclass of Inventory (it inherits from Inventory).
+
+You can just put pass in the body of your class for this step.
+
+class Inventory:
+    def __init__(self):
+        self.slots = []
+
+    def add_item(self, item):
+        self.slots.append(item)
+        
+class SortedInventory(Inventory):
+    pass
+
+
+Great! Now, let's override the add_item method. First, add an add_item method to your new SortedInventory class. It should also take an item argument. Inside your new add_item method, use super() to call add_item() and pass it item to make sure the item still gets added to the slots list.
+
+class Inventory:
+    def __init__(self):
+        self.slots = []
+
+    def add_item(self, item):
+        self.slots.append(item)
+class SortedInventory(Inventory):
+    def add_item(self, item):
+        super().add_item(item)
+
+Sorted inventories should be just that: sorted. Right now, we just add an item onto the slots list whenever our add_item method is called. In the SortedInventory's add_item method, use the list.sort() method to make sure the slots list gets sorted after an item is added.
+
+class Inventory:
+    def __init__(self):
+        self.slots = []
+
+    def add_item(self, item):
+        self.slots.append(item)
+class SortedInventory(Inventory):
+    def add_item(self, item):
+        super().add_item(item)
+        self.slots.sort()
+
+
+
+
+
+
+
+
+
+
+
