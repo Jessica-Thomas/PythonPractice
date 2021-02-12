@@ -26,7 +26,8 @@
 
 
 
-------------------
+-----------------------------------------
+
  def suggest(product_idea):
      if len(product_idea) < 3:
          raise ValueError("Idea should be more than 3 charaters")
@@ -37,7 +38,8 @@
 
 
 
-------------------
+-----------------------------------------
+
      """
  This is importing a function named `tweet` from a file
      that we unfortunately don't have access to change.
@@ -70,7 +72,8 @@
 
 
 
-------------------
+-----------------------------------------
+
  def check_lottery_number(num):
      lottery_numbers = [77, 24, 8, 18, 5, 64]
 
@@ -122,7 +125,8 @@
 
 
 
-------------------
+-----------------------------------------
+
  Alright, I need you to make a new method named feedback. It should take self and an argument named grade. Methods take arguments just like functions do.
 
  Inside the feedback method, if grade is above 50, return the result of the praise method. If it's 50 or below, return the reassurance method's result.
@@ -142,7 +146,8 @@
          return self.reassurance()
 
 
-------------------
+-----------------------------------------
+
  Our Student class is coming along nicely!
 
  I'd like to be able to set the name attribute at the same time that I create an instance. Can you add the code for doing that?
@@ -170,7 +175,8 @@ class Student:
         return self.reassurance()
 
 
-------------------
+-----------------------------------------
+
 OK, let's combine everything we've done so far into one challenge!
 
 First, create a class named RaceCar. In the __init__ for the class, take arguments for color and fuel_remaining. Set these as attributes on the instance.
@@ -268,11 +274,195 @@ class SortedInventory(Inventory):
         self.slots.sort()
 
 
+-----------------------------------------
+
+Add a _str_ method to the DreamCar class. In the method, return a string that states the dream car's make and model. The string should look like this: 'My dream car is a Ford Mustang.'
+
+class DreamCar:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+    # insert your code here
+    def __str__(self):
+        return "My dream car is a {} {}.".format(self.make, self.model)
+
+
+This class should look familiar!
+
+I need you to add __mul__ to NumString so we can multiply our number string by a number. Go ahead and add __rmul__, too.
+
+
+class NumString:
+    def __init__(self, value):
+        self.value = str(value)
+
+    def __str__(self):
+         return self.value
+
+    def __int__(self):
+        return int(self.value)
+
+    def __float__(self):
+        return float(self.value)
+    
+    def __add__(self, other):
+        if '.' in self.value:
+            return float(self) + other
+        return int(self) + other
+      
+    def __radd__(self, other):
+        return self + other
+    
+    def __iadd__(self, other):
+        self.value = self + other
+        return self.value
+# add your code below
+    def __mul__(self, other):
+        if '.' in self.value:
+            return float(self) * other
+        return int(self) * other
+
+    def __rmul__(self, other):
+        self.value = self * other
+        return self.value
+
+Now wrap it up by adding in __imul__, which does in-place multiplication. Be sure to update self.value!
+
+class NumString:
+    def __init__(self, value):
+        self.value = str(value)
+
+    def __str__(self):
+         return self.value
+
+    def __int__(self):
+        return int(self.value)
+
+    def __float__(self):
+        return float(self.value)
+    
+    def __add__(self, other):
+        if '.' in self.value:
+            return float(self) + other
+        return int(self) + other
+      
+    def __radd__(self, other):
+        return self + other
+    
+    def __iadd__(self, other):
+        self.value = self + other
+        return self.value
+# add your code below
+    def __mul__(self, other):
+        if '.' in self.value:
+            return float(self) * other
+        return int(self) * other
+
+    def __rmul__(self, other):
+        self.value = self * other
+        return self.value
+
+# add your code here
+    def __imul__(self, other):
+        self.value = self * other
+        return self.value
 
 
 
 
+Here is a class called Album that holds a list of songs. Add an _iter_ method to our Album class and use yield or yield from so the songs in our album can be iterated through.
 
+class Album:
+    def __init__(self):
+        self.songs = []
+    def add(self, song):
+        self.songs.append(song)
+    # insert your code here
+    def __iter__(self):
+        yield from self.songs
+
+-----------------------------------------
+
+
+Alright, time to subclass int.
+
+Make a class named Double that extends int. For now, just put pass inside the class.
+
+class Double(int):
+    pass
+
+Now override __new__. Create a new int instance from whatever is passed in as arguments and keyword arguments. Return that instance.
+
+You should remove the pass.
+
+class Double(int):
+    def __new__(*args, **kwargs):
+        return int.__new__(*args,**kwargs)
+
+And, finally, double (multiply by two) the int that you created in __new__. Return the new, doubled value. For example, Double(5) would return a 10.
+
+class Double(int):
+    def __new__(*args, **kwargs):
+        return 2 * int.__new__(*args,**kwargs)
+
+-----------------------------------------
+Now I want you to make a subclass of list. Name it Liar.
+
+Override the __len__ method so that it always returns the wrong number of items in the list. For example, if a list has 5 members, the Liar class might say it has 8 or 2.
+
+You'll probably need super() for this.
+
+class Liar(list):
+    
+    def __len__(self):
+        return super(Liar, self).__len__() + 2
+
+
+
+-----------------------------------------
+Below is a class called DreamVacation that holds a location and list of activities. Create a @classmethod called rome that will return a new DreamVacation instance with cls() with the following arguments: location = 'Rome' and activities list = ['visit the Colosseum', 'Eat gelato'].
+
+Hint: The classmethod should take cls instead of self as an argument.
+
+class DreamVacation:
+    def __init__(self, location, activities):
+        self.location = location
+        self.activities = activities
+    # insert your code here
+
+    @classmethod
+    def rome(cls):
+        return cls('Rome', ['visit the Colosseum', 'Eat gelato'])
+
+
+-----------------------------------------
+Add a new property to the Rectangle class named area. It should calculate and return the area of the Rectangle instance (width * length).
+
+class Rectangle:
+    def __init__(self, width, length):
+        self.width = width
+        self.length = length
+ # insert your code here
+    @property
+    def area(self):
+        return self.width * self.length
+
+Let's add one more property to our Rectangle class. This time, add a perimeter property that returns the perimeter of the rectangle (length * 2 + width * 2).
+
+
+
+class Rectangle:
+    def __init__(self, width, length):
+        self.width = width
+        self.length = length
+ # insert your code here
+    @property
+    def area(self):
+        return self.width * self.length
+    
+    @property
+    def perimeter(self):
+        return (self.length*2) + (self.width*2)
 
 
 
