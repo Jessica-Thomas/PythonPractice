@@ -465,5 +465,71 @@ class Rectangle:
         return (self.length*2) + (self.width*2)
 
 
+-----------------------------------------
+Create a new class named TicTacToe that inherits from Board and give it an __init__ method. Inside the __init__ of the TicTacToe class use super() to initialize a board with width and height each set to 3. When an instance of TicTacToe is created, it will result in a board that has the dimensions 3 x 3.
+
+class Board:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.cells = []
+        for y in range(self.height):
+            for x in range(self.width):
+                self.cells.append((x, y))
+ # insert your code here
+
+class TicTacToe(Board):
+    def __init__(self, width=3, height=3):
+        super().__init__(width, height)
+
+Let's make all Board instances iterable so we can loop through their cells attribute. Inside the Board class, define an __iter__ method that yields the cells. If you need help, refer back to the "Emulating Builtins" video.
+
+
+class Board:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.cells = []
+        for y in range(self.height):
+            for x in range(self.width):
+                self.cells.append((x, y))
+
+    def __iter__(self):
+        yield from self.cells
+          
+class TicTacToe(Board):
+    def __init__(self, width=3, height=3):
+        super().__init__(width, height) 
+
+
+-----------------------------------------
+We'd like to compare songs by their length, which is measured in whole seconds. Create an __int__ method that should return the length of the song. Then, create the following comparison methods: __eq__, __lt__, __gt__, __le__ and __ge__.
+
+class Song:
+    def __init__(self, artist, title, length):
+        self.artist = artist
+        self.title = title
+        self.length = length
+
+ # insert your code here
+    def __int__(self):
+        return int(self.length)
+
+    def __eq__(self, other):
+        return int(self) == other
+
+    def __gt__(self, other):
+        return int(self) > other
+
+    def __lt__(self, other):
+        return int(self) < other
+
+    def __ge__(self, other):
+        return int(self) >= other
+
+    def __le__(self, other):
+        return int(self) <= other
+
+
 
 
