@@ -28,11 +28,11 @@ class Die:
         # less than
 
     def __ge__(self, other):
-        return int(self) > other or int(self)== other
+        return int(self) > other or int(self) == other
         # greater than or equal to
 
     def __le__(self, other):
-        return int(self) < other int(self)== other
+        return int(self) < other or int(self) == other
         # less than or equal to
 
     def __add__(self, other): 
@@ -40,6 +40,9 @@ class Die:
 
     def __radd__(self, other): 
         return int(self) + other
+
+    def __repr__(self):
+        return str(self.value)
 
 
 class D6(Die):

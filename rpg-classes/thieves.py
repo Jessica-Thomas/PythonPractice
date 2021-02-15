@@ -1,6 +1,5 @@
 import random
-
-from characters import Character
+import characters
 
 
 class Thief(Character):

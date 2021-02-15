@@ -533,3 +533,70 @@ class Song:
 
 
 
+-----------------------------------------
+Create a new class in dice.py named D20 that extends Die. It should automatically have 20 sides and will not need any arguments to create.
+
+import random
+
+
+class Die:
+    def __init__(self, sides=2):
+        if sides < 2:
+            raise ValueError("Can't have fewer than two sides")
+        self.sides = sides
+        self.value = random.randint(1, sides)
+        
+    def __int__(self):
+        return self.value
+      
+    def __add__(self, other):
+        return int(self) + other
+    
+    def __radd__(self, other):
+        return self + other
+
+ # insert your code here
+
+class D20(Die):
+    def __init__(self, value=0):
+        super().__init__(sides=20)
+
+In the hands.py file import the D20 class from dice.py. Create a classmethod named roll. Since it is a classmethod, it will take cls as an argument. It will also take the number of dice as an argument. Inside the roll classmethod create a new instance of the Hand class and assign it to a variable. Append a D20 to your Hand equal to the number of dice given as an argument to the roll classmethod. Then return the Hand of D20s. For example, if Hand.roll(2) is called, it would return a list with two D20s inside.
+
+
+from dice import D20
+
+class Hand(list):
+
+    def __init__(self, size=0, die_class=D20):
+        super().__init__()
+        for _ in range(size):
+            self.append(die_class())
+
+    @classmethod
+    def roll(cls, size=2):
+        return cls(size=size)
+
+    @property
+    def total(self):
+        return sum(self)
+
+
+-----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
