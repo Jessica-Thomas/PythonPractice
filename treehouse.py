@@ -583,6 +583,442 @@ class Hand(list):
 
 
 -----------------------------------------
+Add a docstring to Treehouse.student. It should say "Gives a pleasant message about the student.".
+
+class Treehouse:
+    def student(self, name):
+        """Gives a pleasant message about the student."""
+        return '{} is a great Treehouse student!'.format(name)
+
+Becomes: 
+
+class Treehouse:
+    def student(self, name):
+        """Gives a pleasant message about the student."""
+        return '{} is a great Treehouse student!'.format(name)
+
+
+
+Add a docstring to Treehouse. Should be "Methods related to Treehouse and students.".
+
+class Treehouse:
+    def student(self, name):
+        """Gives a pleasant message about the student."""
+        return '{} is a great Treehouse student!'.format(name)
+
+
+Becomes: 
+
+class Treehouse:
+    """Methods related to Treehouse and students."""
+    def student(self, name):
+        """Gives a pleasant message about the student."""
+        return '{} is a great Treehouse student!'.format(name)
+
+-----------------------------------------
+Task 1
+Log a message with a level of DEBUG. The message can say anything you want.
+
+import logging
+
+logging.basicConfig(filename='cc.log', level=logging.DEBUG)
+
+# Write your code below here
+
+logging.debug('Debug message')
+
+
+Task 2
+Log "The French have the Grail" as a WARNING level message.
+
+import logging
+
+logging.basicConfig(filename='cc.log', level=logging.DEBUG)
+
+# Write your code below here
+
+logging.debug('Debug message')
+
+logging.warning('The French have the Grail')
+
+
+-----------------------------------------
+Import PDB and call set_trace() where it's needed.
+
+def something_silly(arg1, arg2):
+    if len(arg1) > len(arg2):
+        # Import and use PDB here
+        import pdb; pdb.set_trace()
+        arg1[0] = arg2[0]
+    return arg1, arg2
+
+-----------------------------------------
+
+Challenge Task 1 of 4
+Import the datetime library.
+
+import datetime
+
+Challenge Task 2 of 4
+Create a variable named now that holds the results of datetime.datetime.now().
+
+import datetime
+
+now = datetime.datetime.now()
+
+Challenge Task 3 of 4
+Create a new variable called two that holds the value of now with the hour set to 14. Use the .replace() method.
+
+import datetime
+
+now = datetime.datetime.now()
+
+two = now.replace(hour=14)
+
+
+Challenge Task 4 of 4
+Finally, change two so its minute is 30.
+
+import datetime
+
+now = datetime.datetime.now()
+
+two = now.replace(hour=14, minute=30)
+
+-----------------------------------------
+Challenge Task 1 of 1
+Write a function called far_away that takes one argument, a timedelta. Add that timedelta to datetime.datetime.now() and return the resulting datetime object.
+
+import datetime
+def far_away(timeDelta):
+  return datetime.datetime.now() + timeDelta
+
+
+
+-----------------------------------------
+Write a function named minutes that takes two datetimes and, using timedelta.total_seconds() to get the number of seconds, returns the number of minutes, rounded, between them. The first will always be older and the second newer. You'll need to subtract the first from the second.
+
+import datetime
+time_1 = datetime.datetime.now()
+time_2 = datetime.datetime.now().replace(minute=59)
+
+def minutes(time_1, time_2):
+    delta = time_2 - time_1
+    delta_seconds = delta.total_seconds()
+    return round(delta_seconds/60)
+
+-----------------------------------------
+Create a function named to_string that takes a datetime and gives back a string in the format "24 September 2012".
+
+import datetime
+
+def to_string(datetime_arg):
+    return datetime_arg.strftime('%d %B %Y')
+
+Create a new function named from_string that takes two arguments: a date as a string and an strftime-compatible format string, and returns a datetime created from them.
+
+import datetime
+
+def to_string(datetime_arg):
+    return datetime_arg.strftime('%d %B %Y')
+
+def from_string(datetime_str, datetime_str_format):
+    return datetime.datetime.strptime(datetime_str, datetime_str_format)
+
+-----------------------------------------
+Write a function named time_tango that takes a date and a time. It should combine them into a datetime and return it.
+
+import datetime
+
+def time_tango(date, time):
+    return datetime.datetime.combine(date, time)
+
+
+-----------------------------------------
+Write a function named delorean that takes an integer. Return a datetime that is that many hours ahead from starter.
+
+import datetime
+
+starter = datetime.datetime(2015, 10, 21, 16, 29)
+
+def delorean(ahead):
+    return starter.replace(hour=starter.hour+ahead)
+
+
+-----------------------------------------
+Write a function named time_machine that takes an integer and a string of "minutes", "hours", "days", or "years". This describes a timedelta. Return a datetime that is the timedelta's duration from the starter datetime.
+
+
+import datetime
+
+starter = datetime.datetime(2015, 10, 21, 16, 29)
+
+def time_machine(integer, string):
+    if string == 'years':
+        string = 'days'
+        integer *= 365
+    return starter + datetime.timedelta(**{string: integer})
+
+
+-----------------------------------------
+Create a function named timestamp_oldest that takes any number of POSIX timestamp arguments. Return the oldest one as a datetime object.
+
+Remember, POSIX timestamps are floats and lists have a .sort() method.
+
+import datetime
+
+def timestamp_oldest(*args):
+    return datetime.datetime.fromtimestamp(min(args))
+
+
+-----------------------------------------
+Challenge Task 1 of 3
+Create a variable named moscow that holds a datetime.timezone object at +4 hours.
+
+import datetime 
+moscow = datetime.timezone(datetime.timedelta(hours=4))
+
+Challenge Task 2 of 3
+Now create a timezone variable named pacific that holds a timezone at UTC-08:00.
+
+import datetime 
+moscow = datetime.timezone(datetime.timedelta(hours=4))
+pacific = datetime.timezone(datetime.timedelta(hours=-8))
+
+
+Challenge Task 3 of 3
+Finally, make a third variable named india that hold's a timezone at UTC+05:30.
+
+import datetime 
+moscow = datetime.timezone(datetime.timedelta(hours=4))
+pacific = datetime.timezone(datetime.timedelta(hours=-8))
+india = datetime.timezone(datetime.timedelta(hours=+5.5))
+
+
+-----------------------------------------
+Challenge Task 1 of 2
+naive is a datetime with no timezone.
+
+Create a new timezone for US/Pacific, which is 8 hours behind UTC (UTC-08:00).
+
+Then make a new variable named hill_valley. Copy the datetime info from naive and add the tzinfo attribute with the US/Pacific timezone you made.
+
+
+import datetime
+
+naive = datetime.datetime(2015, 10, 21, 4, 29)
+pacific = datetime.timezone(datetime.timedelta(hours=-8))
+hill_valley = datetime.datetime(2015, 10, 21, 4, 29, tzinfo=pacific)
+
+
+Challenge Task 2 of 2
+Great, but the tzinfo attribute just sets the timezone, it doesn't move the datetime to the new timezone. Let's move one.
+
+Make a new timezone that is UTC+01:00 and set it to a variable called tz.
+
+Create a new variable named paris that uses hill_valley and the astimezone() method to change hill_valley to the new timezone.
+
+
+import datetime
+
+pacific = datetime.timezone(datetime.timedelta(hours=-8))
+europe = datetime.timezone(datetime.timedelta(hours=+1))
+naive = datetime.datetime(2015, 10, 21, 4, 29)
+hill_valley = datetime.datetime(2015, 10, 21, 4, 29, tzinfo=pacific)
+paris = hill_valley.astimezone(europe)
+
+-----------------------------------------
+Challenge Task 1 of 2
+starter is a naive datetime. Use pytz to make it a "US/Pacific" datetime instead and assign this converted datetime to the variable local.
+
+Challenge Task 2 of 2
+Now create a variable named pytz_string by using strftime with the local datetime. Use the fmt string for the formatting.
+
+import datetime
+import pytz
+
+fmt = '%m-%d %H:%M %Z%z'
+starter = datetime.datetime(2015, 10, 21, 4, 29)
+
+pacific = pytz.timezone('US/Pacific')
+local = pacific.localize(starter)
+pytz_string = local.strftime(fmt)
+
+
+-----------------------------------------
+Create a function named to_timezone that takes a timezone name as a string. Convert starter to that timezone using pytz's timezones and return the new datetime.
+
+import datetime
+
+import pytz
+
+starter = pytz.utc.localize(datetime.datetime(2015, 10, 21, 23, 29))
+
+def to_timezone(arg):
+    timezone = pytz.timezone(arg)
+    return starter.astimezone(timezone)
+
+
+-----------------------------------------
+Challenge Task 1 of 5
+Use open() to load the file "basics.txt" into the variable file_object.
+
+with open("basics.txt") as file_object:
+    data = file_object.read()
+
+
+Challenge Task 2 of 5
+Read the contents of file_object into a new variable named data.
+with open("basics.txt") as file_object:
+    data = file_object.read()
+
+
+Challenge Task 3 of 5
+Now close the file_object file so it isn't taking up memory.
+
+with open("basics.txt") as file_object:
+    data = file_object.read()  
+    file_object.close()
+
+Challenge Task 4 of 5
+Import re. Create an re.match() for the word "Four" in the data variable. Assign this to a new variable named first.
+
+import re
+
+with open("basics.txt") as file_object:
+    data = file_object.read()
+    file_object.close()
+
+    first = re.match(r'Four', data)
+
+Challenge Task 5 of 5
+Finally, make a new variable named liberty that is an re.search() for the word "Liberty" in our data variable.
+
+import re
+
+with open("basics.txt") as file_object:
+    data = file_object.read()
+    file_object.close()
+
+    first = re.match(r'Four', data)
+    liberty = re.search(r'Liberty', data)
+
+
+-----------------------------------------
+Challenge Task 1 of 2
+Write a function named first_number that takes a string as an argument. The function should search, with a regular expression, the first number in the string and return the match object.
+
+import re
+
+def first_number(strings):
+  data = re.search(r'\d', strings)
+  return data
+
+
+Challenge Task 2 of 2
+Now, write a function named numbers() that takes two arguments: a count as an integer and a string. Return an re.search for exactly count numbers in the string. Remember, you can multiply strings and integers to create your pattern.
+
+For example: r"\w" * 5 would create r"\w\w\w\w\w".
+
+import re
+
+def first_number(strings):
+  data = re.search(r'\d', strings)
+  return data
+
+def numbers(count, user_string):
+      return re.search(r'\d' * count, user_string)
+
+
+-----------------------------------------
+Challenge Task 1 of 1
+Create a function named phone_numbers that takes a string and returns all of the phone numbers in the string using re.findall(). The phone numbers will all be in the format 555-555-5555.
+
+import re
+
+def phone_numbers(str1): 
+    return (re.findall(r'\d{3}?-\d{3}-\d{4}', str1))
+
+
+-----------------------------------------
+Challenge Task 1 of 1
+Create a function named find_words that takes a count and a string. Return a list of all of the words in the string that are count word characters long or longer.
+
+import re
+
+# EXAMPLE:
+# >>> find_words(4, "dog, cat, baby, balloon, me")
+# ['baby', 'balloon']
+
+def find_words(count, string):
+    return re.findall(r'\w{'+ str(count) + ',}', string)
+
+-----------------------------------------
+Challenge Task 1 of 1
+Create a function named find_emails that takes a string. Return a list of all of the email addresses in the string.
+
+import re
+
+# Example:
+# >>> find_email("kenneth.love@teamtreehouse.com, @support, ryan@teamtreehouse.com, test+case@example.co.uk")
+# ['kenneth@teamtreehouse.com', 'ryan@teamtreehouse.com', 'test@example.co.uk']
+
+def find_emails(string): 
+  re_string = re.findall(r'[-\w\d+.]+@[-\w\d.]+', string)
+  return re_string
+
+-----------------------------------------
+Challenge Task 1 of 1
+Create a variable named good_numbers that is an re.findall() where the pattern matches anything in string except the numbers 5, 6, and 7.
+
+import re
+
+string = '1234567890'
+good_numbers = re.findall(r'[^567]', string)
+
+-----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
