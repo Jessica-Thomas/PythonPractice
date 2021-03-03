@@ -978,6 +978,288 @@ good_numbers = re.findall(r'[^567]', string)
 
 -----------------------------------------
 
+Challenge Task 1 of 1
+Create a variable names that is an re.match() against string. The pattern should provide two groups, one for a last name match and one for a first name match. The name parts are separated by a comma and a space.
+
+import re
+
+string = 'Perotto, Pier Giorgio'
+
+names = re.match(r'([\w]*), ([\w]+ [\w]+)', string)
+
+-----------------------------------------
+Challenge Task 1 of 2
+Create a new variable named contacts that is an re.search() where the pattern catches the email address and phone number from string. Name the email pattern email and the phone number pattern phone. The comma and spaces * should not* be part of the groups.
+
+import re
+
+string = '''Love, Kenneth, kenneth+challenge@teamtreehouse.com, 555-555-5555, @kennethlove
+Chalkley, Andrew, andrew@teamtreehouse.co.uk, 555-555-5556, @chalkers
+McFarland, Dave, dave.mcfarland@teamtreehouse.com, 555-555-5557, @davemcfarland
+Kesten, Joy, joy@teamtreehouse.com, 555-555-5558, @joykesten'''
+
+contacts = re.search(r'''
+    ^[\w]+,\s[\w]+,\s
+    (?P<email>[\w+.]*@[\w.]*)
+    ,\s
+    (?P<phone>\d{3}-\d{3}-\d{4})
+    ,\s
+    @[\w]+$
+''', string, re.X|re.I|re.M)
+
+
+
+Challenge Task 2 of 2
+Great! Now, make a new variable, twitters that is an re.search() where the pattern catches the Twitter handle for a person. Remember to mark it as being at the end of the string. You'll also want to use the re.MULTILINE flag.
+
+import re
+
+string = '''Love, Kenneth, kenneth+challenge@teamtreehouse.com, 555-555-5555, @kennethlove
+Chalkley, Andrew, andrew@teamtreehouse.co.uk, 555-555-5556, @chalkers
+McFarland, Dave, dave.mcfarland@teamtreehouse.com, 555-555-5557, @davemcfarland
+Kesten, Joy, joy@teamtreehouse.com, 555-555-5558, @joykesten'''
+
+contacts = re.search(r'''
+    ^[\w]+,\s[\w]+,\s
+    (?P<email>[\w+.]*@[\w.]*)
+    ,\s
+    (?P<phone>\d{3}-\d{3}-\d{4})
+    ,\s
+    @[\w]+$
+''', string, re.X|re.I|re.M)
+
+twitters = re.search(r'''
+    @[\w]+$
+''', string, re.X|re.M)
+
+-----------------------------------------
+Challenge Task 1 of 2
+Create a variable named players that is an re.search() or re.match() to capture three groups: last_name, first_name, and score. It should include re.MULTILINE.  
+
+import re
+
+string = '''Love, Kenneth: 20
+Chalkley, Andrew: 25
+McFarland, Dave: 10
+Kesten, Joy: 22
+Stewart Pinchback, Pinckney Benton: 18'''
+
+players = re.search(r'''
+  (?P<last_name>[\w ]*)
+  ,\s
+  (?P<first_name>[\w ]*)
+  :\s
+  (?P<score>[\d]*)
+''', string, re.X | re.M)
+
+
+Challenge Task 2 of 2
+Wow! OK, now, create a class named Player that has those same three attributes, last_name, first_name, and score. I should be able to set them through __init__.
+
+import re
+
+string = '''Love, Kenneth: 20
+Chalkley, Andrew: 25
+McFarland, Dave: 10
+Kesten, Joy: 22
+Stewart Pinchback, Pinckney Benton: 18'''
+
+players = re.search(r'''
+  (?P<last_name>[\w ]*)
+  ,\s
+  (?P<first_name>[\w ]*)
+  :\s
+  (?P<score>[\d]*)
+''', string, re.X | re.M)
+
+class Player:
+    def __init__(self, last_name, first_name, score):
+        self.last_name = last_name
+        self.first_name = first_name
+        self.score = score
+
+
+-----------------------------------------
+Now I need you to write a function named absolute that takes two arguments, a path string and a root string. If the path is not already absolute, return the path with the root prepended to it.
+
+For example: absolute("projects/python_basics/", "/") would return "/projects/python_basics/" while absolute("/home/kenneth/django", "C:\") would return "/home/kenneth/django".
+
+def absolute(path, root):
+    if(not os.path.isabs(path)):
+        new_path = ''.join((root, path))
+        return new_path
+    else:
+        return path
+
+
+-----------------------------------------
+Challenge Task 1 of 1
+Create a function named dir_contains takes a path to a directory and a list of file names. If all of the file names exist within that directory, return True, otherwise, return False.
+
+import os
+
+def dir_contains(dir_path, file_names):
+    dir_files = list(os.listdir(dir_path))
+    for file_name in file_names:
+        if file_name not in dir_files:
+            return False
+    return True
+
+-----------------------------------------
+Challenge Task 1 of 1
+Create a function named create_daily_dir in backup.py. This function should take a string which will be a date in either year-month-day (2012-12-22) or month-day-year (12-22-2012) format. Use that to create a directory like 2012-12-22 (year-month-day) in the financial directory (which is in the current directory).
+
+This means that by calling create_daily_dir("04-22-2017"), we'd have a directory structure like financial/2017-04-22/.
+
+import os
+
+def create_daily_dir(string):
+    if int(string.split("-")[2]) > 31:
+        new_str = string.split("-")[2] + '-' + string.split("-")[0] + '-' + string.split("-")[1]
+    else:
+        new_str = string
+    os.makedirs('financial/' + new_str, exist_ok=True)
+
+-----------------------------------------
+Challenge Task 1 of 1
+Finish the function named cleanup in consistency.py. This function should take a string which will be a path to a local directory. The file names in this directory are messy. I need you to clean them up so they all follow the same pattern. Examples and further explanation are in the comments in the file below.
+
+import os
+
+# Filenames consist of a username (alphanumeric, 3-12 characters)
+# and a date (four digit year, two digit month, two digit day),
+# and an extension. They should end up in the format
+# year-month-day-username.extension.
+
+# Example: kennethlove2-2012-04-29.txt becomes 2012-04-29-kennethlove2.txt
+
+def cleanup(path):
+    for f in os.scandir(path):
+        if f.is_file():
+            f = f.path.split('/')[1]
+            filename = f.split('.')[0]
+            extension = f.split('.')[1]
+            date = []
+            for _ in filename.split('-'):
+                try:
+                    int(_)
+                    date.append(_)
+                except ValueError:
+                    username = _
+            old_name = path + '/' + f
+            new_name = path + '/' + '-'.join(date) + '-' + username + '.' + extension
+            os.rename(old_name, new_name)
+
+
+-----------------------------------------
+Challenge Task 1 of 2
+Make a function named delete_by_date. It should take date string like 2015-10-31 and delete any files in the "backups" local directory that have that date in their filename.
+
+Just like the last challenge, the files will be named in the format "year-month-day-username.extension".
+
+
+import os
+
+def delete_by_date(date):
+    for f in os.listdir(os.getcwd() + '/backups'):
+        if date in f:
+            os.remove('backups/' + f)
+
+
+Challenge Task 2 of 2
+Now create a second function named delete_by_user that works similarly but deletes files that have a particular username in their filename.
+
+import os
+
+def delete_by_date(date):
+    for f in os.listdir(os.getcwd() + '/backups'):
+        if date in f:
+            os.remove('backups/' + f)
+            
+def delete_by_user(username):
+    for f in os.listdir(os.getcwd() + '/backups'):
+        if username in f:
+            os.remove('backups/' + f)
+            
+
+-----------------------------------------
+Challenge Task 1 of 1
+I'd like you to change how get_root works. I still want to ask for a path but if the path is relative, change it into an absolute path. You can assume that the path is relative from the current working directory. The function should always return an absolute path.
+
+import pathlib
+
+
+def get_root():
+    root = pathlib.PurePath(
+        input("What's the full path where you'd like the project? ")
+    )
+    if not root.is_absolute():
+        return get_root()
+    return root
+
+BECOMES:
+import os
+import pathlib
+
+def get_root():
+    root = pathlib.PurePath(
+        input("What's the full path where you'd like the project? ")
+    )
+    if not root.is_absolute():
+        dirname = os.path.dirname(__file__)
+        root = os.path.join(dirname, root)
+    return root
+
+-----------------------------------------
+Challenge Task 1 of 1
+This challenge is a bit different from others you've probably done, so try to approach it with an open, creative mind.
+
+I made a slugify function in the last video, but that is just one approach to making a slug. I want you to make your own slugify function in slug.py. Your function should accept two arguments, a string to make into an acceptable file or directory name, and a path.
+
+The rules? Slugs should be unique for their path (you can't have two files or directories with the same name in the same directory), slugs shouldn't have spaces in them, and slug should start with a number, letter, or underscore. Other than that, it's up to you!
+
+import re
+import os
+
+def slugify(string, path):
+    if not re.match(r'[\w\d_]', string):
+        string += '_'
+    string = re.sub(r'\s+', '_', string)
+    slug = os.path.join(path, string)
+    while os.path.exists(slug):
+        slug += '_'
+    return slug
+
+
+-----------------------------------------
+Challenge Task 1 of 1
+Add a doctest to average() that tests the function with the list [1, 2]. Because of how we test doctests, you'll need to leave a blank line at the end of your doctest before the closing quotes.
+
+def average(num_list):
+    """Return the average for a list of numbers"""
+    return sum(num_list) / len(num_list)
+
+
+Becomes:
+
+
+def average(num_list):
+    '''Return the average for a list of numbers
+
+    >>> average([1, 2])  # <-- added space after prompt
+    1.5
+
+    '''
+    return sum(num_list) / len(num_list)
+
+
+-----------------------------------------
+
+
+
+
+
+
 
 
 
