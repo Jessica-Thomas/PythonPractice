@@ -1255,10 +1255,109 @@ def average(num_list):
 
 -----------------------------------------
 
-lets see if i fixed the permission issue i created 
+Challenge Task 1 of 2
+Import the unittest module.
+
+import unittest 
+
+	
+Challenge Task 2 of 2
+Create a TestCase named SimpleTestCase with a simple test that asserts that 10 - 10 is 0. Remember, unittest test names have to start with test_.
+
+
+import unittest 
+
+class SimpleTestCase(unittest.TestCase):
+    def test_little(self):
+        assert 10-10 == 0
+
+
+-----------------------------------------
+Challenge Task 1 of 2
+We haven't used assertTrue yet but I'm sure you can handle this. assertTrue checks that a value is truthy. Complete the first test using assertTrue to test the is_palindrome function. Provide your own good palindrome or use "tacocat".
+
+
+import unittest
+
+from string_fun import is_palindrome
+
+class PalindromeTestCase(unittest.TestCase): 
+    def test_good_palindrome(self): 
+        self.assertTrue(is_palindrome('tacocat')) 
+    
+    def test_bad_palindrome(self): 
+        self.assertFalse(is_palindrome()) 
+        pass
+
+Challenge Task 2 of 2
+Great! Now let's use the reverse of assertTrue which is assertFalse. Fill out test_bad_palindrome with the assertFalse assertion, is_palindrome, and a bad palindrome.
+
+import unittest
+
+from string_fun import is_palindrome
+
+class PalindromeTestCase(unittest.TestCase): 
+    def test_good_palindrome(self): 
+        self.assertTrue(is_palindrome('tacocat')) 
+    
+    def test_bad_palindrome(self): 
+        self.assertFalse(is_palindrome('cheese')) 
+
+
+-----------------------------------------
+Challenge Task 1 of 2
+The get_anagrams() function takes one or more words and returns anagrams for each of them as a list. Finish the test_in_anagrams() test to check that the anagrams for the string "treehouse" contains the word "house".
+
+
+import unittest
+
+from string_fun import get_anagrams
+
+
+class AnagramTests(unittest.TestCase):
+    def test_in_anagrams(self):
+        self.assertIn('house', get_anagrams('treehouse'))
 
 
 
+Challenge Task 2 of 2
+Conversely, we shouldn't see the word "code" in the list of anagrams for "treehouse". Add a new test named test_not_in_anagrams and use self.assertNotIn() to make sure "code" isn't in the anagrams for "treehouse".
+
+import unittest
+
+from string_fun import get_anagrams
+class AnagramTests(unittest.TestCase):
+    def test_in_anagrams(self):
+        self.assertIn('house', get_anagrams('treehouse'))
+    
+    def test_not_in_anagrams(self):
+        self.assertNotIn('code', get_anagrams('treehouse'))
+-----------------------------------------
+Challenge Task 1 of 2
+Our get_anagrams() function raises a ValueError when you pass it an empty string. Finish the test to make sure this happens. You'll want to use assertRaises.
+
+import unittest
+
+from string_fun import get_anagrams
+
+class AnagramTestCase(unittest.TestCase): 
+    def test_empty_string(self): 
+        with self.assertRaises(ValueError): 
+            get_anagrams("")
+
+Challenge Task 2 of 2
+Now add a new test, test_no_args that should also assertRaises(ValueError). This time, call get_anagrams() with no arguments.
+
+import unittest
+
+from string_fun import get_anagrams
+
+class AnagramTestCase(unittest.TestCase): 
+    def test_empty_string(self): 
+        with self.assertRaises(ValueError): 
+            get_anagrams("")
 
 
-
+    def test_no_args(self):
+        with self.assertRaises(ValueError):
+            get_anagrams()
